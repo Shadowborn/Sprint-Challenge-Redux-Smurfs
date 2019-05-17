@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from "react-redux";
 import { newSmurf } from "../actions"
-import SmurfList from "./SmurfList";
+// import SmurfList from "./SmurfList";
 
 
 class NewSmurfForm extends Component {
@@ -10,14 +10,20 @@ class NewSmurfForm extends Component {
     super(props);
     this.state = {
       name: '',
-    //   age: '',
-    //   height: ''
+      age: '',
+      height: ''
     };
   }
-
+  componentDidMount() {
+    // call our action
+    console.log("Friends list view props", this.props)
+    
+  }
   addSmurf = e => {
-    console.log("Add new smurf state", this.props)
-    // e.preventDefault();
+    console.log("Add new smurf props", this.props)
+    console.log("Add new smurf state", this.state)
+    e.preventDefault();
+    this.props.newSmurf(this.state);
   };
 
   handleInputChange = e => {
@@ -34,7 +40,7 @@ class NewSmurfForm extends Component {
             value={this.state.name}
             name="name"
           />
-          {/* <input
+          <input
             onChange={this.handleInputChange}
             placeholder="age"
             value={this.state.age}
@@ -45,7 +51,7 @@ class NewSmurfForm extends Component {
             placeholder="height"
             value={this.state.height}
             name="height"
-          /> */}
+          />
           <button type="submit">Add Smurf</button>
         </form>
       </div>
@@ -53,13 +59,9 @@ class NewSmurfForm extends Component {
   }
 }
 // export default App;
-const mapStateToProps = state => {
-  console.log('mapStateToProps', state)
-  return {
-    addingSmurf: true,
-    error: state.error,
-  }
-}
+const mapStateToProps = state => ({
+
+})
 export default connect(
   mapStateToProps /* mapStateToProps replaces null here */,
   {

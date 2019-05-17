@@ -25,7 +25,9 @@ import {/* we need our action types here*/
   JUST_FETCH,
   SUCCESS_FETCH,
   FAILURE_FETCH,
-  ADD_NEW
+  ADD_NEW,
+  ADD_NEW_SUCCESS,
+  ADD_NEW_ERROR
   }from "../actions/index";
   
   const initialState = {
@@ -58,8 +60,17 @@ import {/* we need our action types here*/
       case ADD_NEW: return {
         ...state,
         addingSmurf: true,
-        error: 'Cant add smurf'
       }
+      case ADD_NEW_SUCCESS: return {
+        ...state,
+        addingSmurf: false,
+        error: '',
+        smurfs: action.payload
+      };
+      case ADD_NEW_ERROR: return {
+        ...state,
+        error: 'Cant add new smurf',
+      };
       default:
         return state;
       }

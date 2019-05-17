@@ -28,20 +28,22 @@ export const fetchSmurfs = () => dispatch => {
 
 
 export const ADD_NEW = 'ADD_NEW';
+export const ADD_NEW_SUCCESS = 'ADD_NEW_SUCCESS';
+export const ADD_NEW_ERROR = 'ADD_NEW_ERROR';
 
-export const newSmurf = () => dispatch => {
+export const newSmurf = smurf => dispatch => {
   dispatch({ type: ADD_NEW })
+    console.log("Add new smurf axios", smurf)
   axios
-    .post('http://localhost:3333/smurfs')
-    console.log("Add new smurf axios", this.state)
+    .post('http://localhost:3333/smurfs', smurf)
     .then(res => {
-      dispatch({ payload: res.data })
+      dispatch({ type: ADD_NEW_SUCCESS, payload: res.data });
     })
-    .catch(err => {
-      dispatch({err})
+    // console.log("Add new smurf axios", smurf)
+    .catch(ADD_NEW_ERROR => {
+      dispatch({ type: ADD_NEW_ERROR})
     })
 }
-
 
 
 
