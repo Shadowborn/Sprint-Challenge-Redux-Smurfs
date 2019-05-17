@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
+import { connect } from "react-redux";
+import { fetchSmurfs, newSmurf } from "../actions"
+import SmurfList from "./SmurfList";
+import NewSmurfForm from './NewSmurfForm';
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -7,16 +11,44 @@ import './App.css';
  `How do I ensure that my component links the state to props?`
  */
 class App extends Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    // call our action
+    console.log("Friends list view props", this.props)
+    this.props.fetchSmurfs();
+  }
+
   render() {
+    if (this.props.fetching) {
+      // return something here to indicate that you are fetching data
+    }
+    
     return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+      <div className="FriendsList_wrapper">
+        <SmurfList smurfs={this.props.smurfs} />
+        <NewSmurfForm newSmurf={this.newSmurf}/>
       </div>
     );
   }
 }
 
-export default App;
+// export default App;
+const mapStateToProps = state => {
+  console.log('mapStateToProps', state)
+  return {
+    smurfs: state.smurfs,
+    fetching: state.fetching,
+    error: state.error,
+  }
+}
+
+export default connect(
+  mapStateToProps /* mapStateToProps replaces null here */,
+  {
+    fetchSmurfs,/* action creators go here */
+    newSmurf
+  }
+)(App);
