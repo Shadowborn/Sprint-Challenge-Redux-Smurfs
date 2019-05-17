@@ -1,7 +1,36 @@
+import axios from 'axios';
+
 /* 
   Action Types Go Here!
   Be sure to export each action type so you can pull it into your reducer
 */
+
+export const JUST_FETCH = 'JUST_FETCH';
+export const SUCCESS_FETCH = 'SUCCESS_FETCH';
+export const FAILURE_FETCH = 'FAILURE_FETCH';
+
+
+export const fetchSmurfs = () => dispatch => {
+    dispatch({ type : JUST_FETCH })
+    axios
+        .get('http://localhost:3333/smurfs')
+        .then(res => {
+            dispatch({ type : SUCCESS_FETCH, payload: res.data })
+                console.log("Fetch data", res.data);
+            })
+        .catch(err => {
+            dispatch({type:FAILURE_FETCH})
+            console.log("Axios call error", err);
+        })
+}
+
+
+
+
+
+
+
+
 
 /*
   For this project you'll need at least 2 action creators for the main portion,
