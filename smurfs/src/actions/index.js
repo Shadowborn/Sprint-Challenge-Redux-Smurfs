@@ -27,6 +27,20 @@ export const fetchSmurfs = () => dispatch => {
 
 
 
+export const ADD_NEW = 'ADD_NEW';
+
+export const newSmurf = () => dispatch => {
+  dispatch({ type: ADD_NEW })
+  axios
+    .post('http://localhost:3333/smurfs')
+    console.log("Add new smurf axios", this.state)
+    .then(res => {
+      dispatch({ payload: res.data })
+    })
+    .catch(err => {
+      dispatch({err})
+    })
+}
 
 
 

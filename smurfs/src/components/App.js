@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from "react-redux";
 import { fetchSmurfs } from "../actions"
 import SmurfList from "./SmurfList";
+import NewSmurfForm from './NewSmurfForm';
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -28,6 +29,7 @@ class App extends Component {
     return (
       <div className="FriendsList_wrapper">
         <SmurfList smurfs={this.props.smurfs} />
+        <NewSmurfForm/>
       </div>
     );
   }

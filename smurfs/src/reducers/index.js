@@ -24,7 +24,8 @@
 import {/* we need our action types here*/ 
   JUST_FETCH,
   SUCCESS_FETCH,
-  FAILURE_FETCH
+  FAILURE_FETCH,
+  ADD_NEW
   }from "../actions/index";
   
   const initialState = {
@@ -53,6 +54,12 @@ import {/* we need our action types here*/
           ...state,
           error: 'This is an error'
         }
+
+      case ADD_NEW: return {
+        ...state,
+        addingSmurf: true,
+        error: 'Cant add smurf'
+      }
       default:
         return state;
       }
